@@ -19,26 +19,39 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'CREATE':
-      return [...state, {
-        content: action.data,
-        id: getId(),
-        votes: 0
-      }]
+const reducer = (store = initialState, action) => {
+  if (action.type==='VOTE') {
+    console.log(action.id, store);
+    const old = store.filter(a => a.id !==action.id)
+    const voted = store.find(a => a.id === action.id)
 
-    
-    case 'VOTE':
-      const id = action.id
-      const stateCopy = [ ...state ]
-      const foundIndex = stateCopy.findIndex(x => x.id === id);
-      const oldItem = stateCopy[foundIndex]
-      stateCopy[foundIndex] = {...oldItem, votes: oldItem.votes +1 }
-      return stateCopy
-    
+    return [...old, { ...voted, votes: voted.votes + 1 } ]
   }
-  return state
+  if (action.type === 'CREATE') {
+
+    return [...store, { content: action.content, id: getId(), votes:0 }]
+  }
+
+  return store
 }
+
+export const giveVote = (id) => {
+  console.log("IN REDUCER", id);
+  return {
+    type: 'VOTE',
+    id
+  }
+}
+
+export const createAnecdote = (content) => {
+  console.log("IN REDUCER", content)
+
+  return {
+    type: 'CREATE',
+    content
+  }
+}
+
+
 
 export default reducer
