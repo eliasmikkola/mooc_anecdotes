@@ -22,7 +22,7 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            2
+            4
         ],
         "linebreak-style": [
             "error",
@@ -47,4 +47,4 @@ module.exports = {
         "no-console": 0,
         "react/prop-types": 0
     }
-};
+};  
