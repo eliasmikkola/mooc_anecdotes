@@ -3,7 +3,7 @@ const anecdotesAtStart = []
 
 
 const initialState = {
-    message: 'Initial state notification..'
+    message: ''
 }
 
 const reducer = (store = initialState, action) => {

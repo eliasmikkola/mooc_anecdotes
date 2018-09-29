@@ -1,5 +1,6 @@
 import React from 'react'
 import { createAnecdote } from '../reducers/anecdoteReducer.js'
+import { clearNotification, addNotification } from '../reducers/notificationReducer.js'
 
 
 /* eslint no-undef: 0 */ // --> OFF
@@ -9,7 +10,10 @@ class AnecdoteForm extends React.Component {
         e.preventDefault()
         const content = e.target.anecdote.value
         this.props.store.dispatch(createAnecdote(content))
-
+        this.props.store.dispatch(addNotification(`New anecdote "${content}" added.`))
+        setTimeout(() => {
+            this.props.store.dispatch(clearNotification())
+        }, 5000)
         e.target.anecdote.value = ''
     }
     render() {
