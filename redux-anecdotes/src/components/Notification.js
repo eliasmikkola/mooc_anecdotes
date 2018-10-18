@@ -8,7 +8,7 @@ class Notification extends React.Component {
             padding: 10,
             borderWidth: 1
         }
-        const { message } = this.props
+        const message = this.props.notifications.message
         return (
             message !== '' ?
                 <div style={style}>
@@ -18,6 +18,13 @@ class Notification extends React.Component {
         )
     }
 }
-const ConnectedNotification = connect()(Notification)
+
+const mapStateToProps = (state) => {
+    return {
+        notifications: state.notifications
+    }
+}
+
+const ConnectedNotification = connect(mapStateToProps)(Notification)
 export default ConnectedNotification
 
