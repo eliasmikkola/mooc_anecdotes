@@ -1,7 +1,8 @@
 import { createStore, combineReducers } from 'redux'
-import anecdoteReducer from './reducers/anecdoteReducer'
+import anecdoteReducer, { anecdoteInitialization } from './reducers/anecdoteReducer'
 import notificationReducer from './reducers/notificationReducer'
 import filterReducer from './reducers/filterReducer'
+import anecdoteService from './services/anecdotes'
 
 
 const reducer = combineReducers({
@@ -10,6 +11,10 @@ const reducer = combineReducers({
     filters: filterReducer
 })
 const store = createStore(reducer)
-console.log(store.getState())
+
+anecdoteService.getAll().then(anecdotes => {
+    console.log("here", anecdotes)
+    store.dispatch(anecdoteInitialization(anecdotes))
+})
 
 export default store
