@@ -21,7 +21,7 @@ const reducer = (store = initialState, action) => {
         return [...old, { ...voted, votes: voted.votes + 1 } ]
     }
     if (action.type === 'CREATE') {
-        return [...store, { content: action.content, id: getId(), votes:0 }]
+        return [...store, action.content]
     }
     if (action.type === 'INIT_ANECDOTES') {
         return action.content
