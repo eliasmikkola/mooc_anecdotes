@@ -2,89 +2,84 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
 
 const Menu = () => {
-  const menuStyle = {
-    color: 'white',
-    'height': '50px',
-    backgroundColor: '#194d33'
-  }
-  const linkStyle = {
-    color: 'white',
-    fontWeight: 'bold',
-    lineHeight: '50px',
-    'height': '50pximportant',
-    width: 100,
-    marginRight: 10,
-    backgroundColor: '#194d33'
-  }
-  const activeLinkStyle = {
-    color: '#194d33',
-    fontWeight: 'bold',
-    lineHeight: '20px',
-    width: 100,
-    backgroundColor: 'white'
-  }
-  return (<div style={menuStyle}>    
-      <NavLink exact style={linkStyle} activeStyle={activeLinkStyle} to="/anecdotes">anecdotes</NavLink>&nbsp;
-      <NavLink exact style={linkStyle}  activeStyle={activeLinkStyle}  to="/create">create new</NavLink>&nbsp;
-      <NavLink exact style={linkStyle}  activeStyle={activeLinkStyle}  to="/about">about</NavLink>&nbsp;
+  
+  return (<div class="navbar is-primary">   
+        
+          <NavLink activeClassName="is-active has-background-white	 navbar-item"  className="navbar-item" exact to="/anecdotes">
+            anecdotes
+          </NavLink >&nbsp;
+        
+          <NavLink activeClassName="is-active has-background-white	 navbar-item"  className="navbar-item" exact  to="/create">
+            create new
+          </NavLink >&nbsp;
+        
+          <NavLink activeClassName="is-active has-background-white	 navbar-item"  className="navbar-item" exact  to="/about">
+            about
+          </NavLink >&nbsp;
     </div>
   )
 }
 
 const Anecdote = ({anecdote}) => {
-  console.log("IN ANEC", anecdote);
   return (
-  <div>
-      <h1>{anecdote.content}</h1>
-      <h2>{anecdote.author}</h2>
+  <div class="box control">
+      <h1 class="title">{anecdote.content}</h1>
+      <h2 class="subtitle">{anecdote.author}</h2>
       <h4>{anecdote.votes} likes</h4>
       <p>for more link go to <a href={anecdote.info}>{anecdote.info}</a></p>
   </div>
 )}
 
 const Notification = ({notification}) => {
-  const style = {
-    border: '1px solid green',
-    color: 'green',
-    padding: 5,
-    'border-radius': 5
-  }
   return (
-  <div  style={style}>
+  <div  class="notification is-success">
       <p>{notification.message}</p>
   </div>
 )}
 
 const AnecdoteList = ({ anecdotes }) => (
-  <div>
-    <h2>Anecdotes</h2>
-    <ul>
-      {anecdotes.map((anecdote, index) => <li key={anecdote.id}>
-          <Link key={index} to={`/anecdotes/${anecdote.id}/`} >
+  <div class="box control">
+    <h2 class="title">Anecdotes</h2>
+    
+    {anecdotes.map((anecdote, index) => (
+      
+      <Link class="menu-label" key={index} to={`/anecdotes/${anecdote.id}/`} >
+          <a class="panel-block menu">
+            <span class="panel-icon">
+              <i class="fas fa-book" aria-hidden="true"></i>
+            </span>
             {anecdote.content}
-          </Link>
-        </li>
+          </a>
+        </Link>
+          )
         )}
-    </ul>  
   </div>
 )
 
 const About = () => (
-  <div>
-    <h2>About anecdote app</h2>
-    <p>According to Wikipedia:</p>
-    
-    <em>An anecdote is a brief, revealing account of an individual person or an incident. 
-      Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself, 
-      such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative. 
-      An anecdote is "a story with a point."</em>
+  <div class="box">
+    <h2 class="title">About anecdote app</h2>
+    <div class="columns">
+      <div class="column is-two-thirds">
+        <p>According to Wikipedia:</p>
+        
+        <em>An anecdote is a brief, revealing account of an individual person or an incident. 
+          Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself, 
+          such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative. 
+          An anecdote is "a story with a point."</em>
 
-    <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
+        <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
+
+      </div>
+      <div class="column is-one-third">
+        <img width="300px" height="auto" src="/turing.jpg"/>
+      </div>
+    </div>
   </div>
 )
 
 const Footer = () => (
-  <div>
+  <div class="footer">
     Anecdote app for <a href='https://courses.helsinki.fi/fi/TKT21009/121540749'>Full Stack -sovelluskehitys</a>.
 
     See <a href='https://github.com/mluukkai/routed-anecdotes'>https://github.com/mluukkai/routed-anecdotes</a> for the source code. 
@@ -119,22 +114,22 @@ class CreateNew extends React.Component {
 
   render() {
     return(
-      <div>
-        <h2>create a new anecdote</h2>
+      <div class="container">
+        <h2 class="title">create a new anecdote</h2>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            content 
-            <input name='content' value={this.state.content} onChange={this.handleChange} />
+          <div class="control">
+            <a class="label">content </a>
+            <input class="input" name='content' value={this.state.content} onChange={this.handleChange} />
           </div>
           <div>
-            author
-            <input name='author' value={this.state.author} onChange={this.handleChange} />
+            <a class="label">author</a>
+            <input class="input" name='author' value={this.state.author} onChange={this.handleChange} />
           </div>
           <div>
-            url for more info
-            <input name='info' value={this.state.info} onChange={this.handleChange} />
+            <a class="label">url for more info</a>
+            <input class="input" name='info' value={this.state.info} onChange={this.handleChange} />
           </div> 
-          <button>create</button>
+          <button class="button is-primary"> create</button>
         </form>
       </div>  
     )
@@ -205,6 +200,7 @@ class App extends React.Component {
       votes: anecdote.votes + 1
     }
 
+    
     const anecdotes = this.state.anecdotes.map(a => a.id === id ? voted : a)
 
     this.setState({ anecdotes })
@@ -214,7 +210,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Software anecdotes</h1>
+          <h1 class="title">Software anecdotes</h1>
           <NotificationList notifications={this.state.notifications}/>
           <Router>
             <div>
