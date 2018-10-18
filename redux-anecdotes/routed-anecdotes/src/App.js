@@ -1,13 +1,35 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
 
-const Menu = () => (
-  <div>    
-    <Link to="/anecdotes">anecdotes</Link>&nbsp;
-    <Link to="/create">create new</Link>&nbsp;
-    <Link to="/about">about</Link>&nbsp;
-  </div>
-)
+const Menu = () => {
+  const menuStyle = {
+    color: 'white',
+    'height': '50px',
+    backgroundColor: '#194d33'
+  }
+  const linkStyle = {
+    color: 'white',
+    fontWeight: 'bold',
+    lineHeight: '50px',
+    'height': '50pximportant',
+    width: 100,
+    marginRight: 10,
+    backgroundColor: '#194d33'
+  }
+  const activeLinkStyle = {
+    color: '#194d33',
+    fontWeight: 'bold',
+    lineHeight: '20px',
+    width: 100,
+    backgroundColor: 'white'
+  }
+  return (<div style={menuStyle}>    
+      <NavLink exact style={linkStyle} activeStyle={activeLinkStyle} to="/anecdotes">anecdotes</NavLink>&nbsp;
+      <NavLink exact style={linkStyle}  activeStyle={activeLinkStyle}  to="/create">create new</NavLink>&nbsp;
+      <NavLink exact style={linkStyle}  activeStyle={activeLinkStyle}  to="/about">about</NavLink>&nbsp;
+    </div>
+  )
+}
 
 const Anecdote = ({anecdote}) => {
   console.log("IN ANEC", anecdote);
@@ -21,8 +43,14 @@ const Anecdote = ({anecdote}) => {
 )}
 
 const Notification = ({notification}) => {
+  const style = {
+    border: '1px solid green',
+    color: 'green',
+    padding: 5,
+    'border-radius': 5
+  }
   return (
-  <div>
+  <div  style={style}>
       <p>{notification.message}</p>
   </div>
 )}
